@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     isGlobal: true,
   }),
   MongooseModule.forRoot(process.env.URL_MONGO),
+  OrderModule
   ],
   controllers: [AppController],
   providers: [AppService],

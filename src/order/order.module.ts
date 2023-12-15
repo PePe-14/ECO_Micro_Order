@@ -1,16 +1,18 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 import { OrderController } from './order.controller';
 import { OrderService } from './order.service';
 import { MongooseModule } from '@nestjs/mongoose';
+import { Product, ProductSchema } from './schema/product.schema';
+import { User, UserSchema } from './schema/user.schema';
+import { Order, OrdenSchema } from './schema/order.schema';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-    envFilePath: '.env',
-    isGlobal: true,
-  }),
-  MongooseModule.forRoot(process.env.URL_MONGO),
+    MongooseModule.forFeature([
+      { name: User.name, schema: UserSchema },
+      { name: Product.name, schema: ProductSchema },
+      { name: Order.name, schema: OrdenSchema },
+    ])
   ],
   controllers: [OrderController],
   providers: [OrderService],
